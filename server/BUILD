@@ -33,6 +33,9 @@ java_library(
     deps = [
       ":routes-lib",
       "//event/github:router",
+      "//service:router",
+      "//dependencies/maven/artifacts/com/typesafe/akka:akka-actor-typed-2-12",
+      "//dependencies/maven/artifacts/com/typesafe/akka:akka-stream-2-12",
       "//dependencies/maven/artifacts/com/typesafe/play:filters-helpers-2-12",
       "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
     ],

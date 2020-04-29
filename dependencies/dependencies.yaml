@@ -67,3 +67,7 @@ dependencies:
     javax.inject:
       version: "1"
       lang: java
+  org.scala-lang:
+    scala-library:
+      version: "2.12.11"
+      lang: java

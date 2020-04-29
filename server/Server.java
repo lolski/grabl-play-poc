@@ -1,5 +1,9 @@
 package server;
 
+import akka.actor.typed.ActorSystem;
+import akka.actor.typed.javadsl.Adapter;
+import akka.actor.typed.javadsl.Behaviors;
+import akka.stream.ActorMaterializer;
 import play.Application;
 import play.ApplicationLoader;
 import play.BuiltInComponentsFromContext;
@@ -15,6 +19,8 @@ public class Server implements ApplicationLoader {
     }
 
     static class Component extends BuiltInComponentsFromContext implements HttpFiltersComponents {
+        private ActorSystem<Object> actorSystem = ActorSystem.create(Behaviors.empty(), "server");
+        private ActorMaterializer actorMaterializer = ActorMaterializer.create(Adapter.toClassic(actorSystem));
         public Component(ApplicationLoader.Context context) {
             super(context);
         }
@@ -22,7 +28,8 @@ public class Server implements ApplicationLoader {
         @Override
         public Router router() {
             event.github.Router eventGithub = new event.github.Router();
-            return new Routes(scalaHttpErrorHandler(), eventGithub).asJava();
+            service.Router service = new service.Router(actorSystem, actorMaterializer);
+            return new Routes(scalaHttpErrorHandler(), eventGithub, service).asJava();
         }
     }
 }

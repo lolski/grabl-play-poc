@@ -4,7 +4,7 @@ java_library(
         "//external:jar/org/scala-lang/scala-library"
     ],
     visibility = [
-        "//dependencies/maven/artifacts:__subpackages__"
+        "//visibility:public"
     ]
 )
 
