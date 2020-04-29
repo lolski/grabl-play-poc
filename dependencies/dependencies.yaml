@@ -16,7 +16,13 @@ dependencies:
       version: "4.2.2"
       lang: java
   com.typesafe.akka:
+    akka-actor_2.12:
+      version: "2.6.3"
+      lang: java
     akka-actor-typed_2.12:
+      version: "2.6.3"
+      lang: java
+    akka-stream_2.12:
       version: "2.6.3"
       lang: java
   com.typesafe.play:

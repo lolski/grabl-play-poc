@@ -9,7 +9,7 @@ java_library(
         "//dependencies/maven/artifacts/org/scala-lang:scala-library"
     ],
     visibility = [
-        "//dependencies/maven/artifacts:__subpackages__"
+        "//visibility:public"
     ]
 )
 
@@ -133,7 +133,7 @@ java_library(
         ":akka-protobuf-v3-2-12"
     ],
     visibility = [
-        "//dependencies/maven/artifacts:__subpackages__"
+        "//visibility:public"
     ]
 )
 

@@ -12,7 +12,8 @@ scala_library(
   name = "routes-lib",
   srcs = [ ":routes-def" ],
   deps = [
-        "//event/github:routes",
+        "//event/github:router",
+        "//service:router",
         "//dependencies/maven/artifacts/com/typesafe/akka:akka-actor-typed-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-guice-2-12",
@@ -31,7 +32,7 @@ java_library(
     ],
     deps = [
         ":routes-lib",
-        "//event/github:routes",
+        "//event/github:router",
         "//dependencies/maven/artifacts/com/typesafe/play:filters-helpers-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
     ],

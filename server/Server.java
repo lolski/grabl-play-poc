@@ -8,7 +8,7 @@ import play.routing.Router;
 import router.Routes;
 
 public class Server implements ApplicationLoader {
-    
+
     @Override
     public Application load(Context context) {
         return new Component(context).application();
@@ -21,7 +21,7 @@ public class Server implements ApplicationLoader {
 
         @Override
         public Router router() {
-            event.github.Routes eventGithub = new event.github.Routes();
+            event.github.Router eventGithub = new event.github.Router();
             return new Routes(scalaHttpErrorHandler(), eventGithub).asJava();
         }
     }
