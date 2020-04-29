@@ -9,7 +9,7 @@ play_routes(
 )
 
 scala_library(
-  name = "grabl",
+  name = "routes-lib",
   srcs = [ ":routes-def" ],
   deps = [
         "//event/github:routes",
@@ -22,6 +22,18 @@ scala_library(
         "//dependencies/maven/artifacts/com/fasterxml/jackson/core:jackson-databind",
         "//dependencies/maven/artifacts/javax/inject:javax-inject"
     ],
+)
+
+java_library(
+    name = "server-lib",
+    srcs = [
+        "Component.java", "Server.java",
+    ],
+    deps = [
+        ":routes-lib",
+        "//dependencies/maven/artifacts/com/typesafe/play:filters-helpers-2-12",
+        "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
+    ],
     resources = ["application.conf"],
     resource_strip_prefix = "server",
     runtime_deps = [
@@ -29,9 +41,8 @@ scala_library(
         "//dependencies/maven/artifacts/com/typesafe/play:play-akka-http-server-2-12",
     ],
 )
-
 java_binary(
-    name = "grabl-bin",
+    name = "server-bin",
     main_class = "play.core.server.ProdServerStart",
-    runtime_deps = [":grabl"]
+    runtime_deps = [":server-lib"]
 )

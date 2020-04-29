@@ -14,6 +14,22 @@ java_library(
 
 
 java_library(
+    name = "filters-helpers-2-12",
+    exports = [
+        "//external:jar/com/typesafe/play/filters-helpers-2-12"
+    ],
+    runtime_deps = [
+        "//dependencies/maven/artifacts/org/scala-lang:scala-library",
+        ":play-2-12"
+    ],
+    visibility = [
+        "//visibility:public"
+    ]
+)
+
+
+
+java_library(
     name = "play-2-12",
     exports = [
         "//external:jar/com/typesafe/play/play-2-12"
