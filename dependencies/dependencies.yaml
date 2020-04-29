@@ -11,6 +11,10 @@ options:
   thirdPartyDirectory: dependencies/maven/artifacts
 
 dependencies:
+  com.google.inject:
+    guice:
+      version: "4.2.2"
+      lang: java
   com.typesafe.akka:
     akka-actor-typed_2.12:
       version: "2.6.3"

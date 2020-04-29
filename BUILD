@@ -9,8 +9,8 @@ play_routes(
 )
 
 java_library(
-  name = "controller",
-  srcs = glob(["controllers/*.java"]),
+  name = "event",
+  srcs = glob(["event/**/*.java"]),
   deps = [
         "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-java-2-12",
@@ -25,7 +25,8 @@ scala_library(
   name = "grabl",
   srcs = [ ":route" ],
   deps = [
-        ":controller",
+        ":event",
+        "//dependencies/maven/artifacts/com/google/inject:guice",
         "//dependencies/maven/artifacts/com/typesafe/akka:akka-actor-typed-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-java-2-12",
@@ -34,8 +35,14 @@ scala_library(
         "//dependencies/maven/artifacts/com/fasterxml/jackson/core:jackson-databind",
         "//dependencies/maven/artifacts/javax/inject:javax-inject"
     ],
+    resources = ["application.conf"],
 )
 
+java_binary(
+    name = "grabl-bin",
+    main_class = "play.core.server.ProdServerStart",
+    runtime_deps = [":grabl"],
+)
 
 java_binary(
     name = "bazel-deps",
