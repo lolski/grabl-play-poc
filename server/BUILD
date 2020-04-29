@@ -27,7 +27,7 @@ scala_library(
 java_library(
     name = "server-lib",
     srcs = [
-        "Component.java", "Server.java",
+        "Server.java",
     ],
     deps = [
         ":routes-lib",
