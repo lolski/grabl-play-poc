@@ -1,11 +1,11 @@
 package server;
 
-import play.api.Application;
-import play.api.ApplicationLoader;
+import play.Application;
+import play.ApplicationLoader;
 
 public class Server implements ApplicationLoader {
     @Override
     public Application load(Context context) {
-        return null;
+        return new Component(context).application();
     }
 }

@@ -31,6 +31,7 @@ java_library(
     ],
     deps = [
         ":routes-lib",
+        "//event/github:routes",
         "//dependencies/maven/artifacts/com/typesafe/play:filters-helpers-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
     ],

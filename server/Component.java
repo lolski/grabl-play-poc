@@ -4,6 +4,7 @@ import play.ApplicationLoader;
 import play.BuiltInComponentsFromContext;
 import play.routing.Router;
 import play.filters.components.HttpFiltersComponents;
+import router.Routes;
 
 public class Component extends BuiltInComponentsFromContext implements HttpFiltersComponents {
 
@@ -13,6 +14,7 @@ public class Component extends BuiltInComponentsFromContext implements HttpFilte
 
     @Override
     public Router router() {
-        return Router.empty();
+        event.github.Routes eventGithub = new event.github.Routes();
+        return new Routes(scalaHttpErrorHandler(), eventGithub).asJava();
     }
 }
