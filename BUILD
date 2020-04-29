@@ -29,6 +29,8 @@ scala_library(
         "//dependencies/maven/artifacts/com/google/inject:guice",
         "//dependencies/maven/artifacts/com/typesafe/akka:akka-actor-typed-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-2-12",
+        "//dependencies/maven/artifacts/com/typesafe/play:play-akka-http-server-2-12",
+        "//dependencies/maven/artifacts/com/typesafe/play:play-guice-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-java-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:play-server-2-12",
         "//dependencies/maven/artifacts/com/typesafe/play:twirl-api-2-12",
@@ -36,12 +38,16 @@ scala_library(
         "//dependencies/maven/artifacts/javax/inject:javax-inject"
     ],
     resources = ["application.conf"],
+    runtime_deps = ["//dependencies/maven/artifacts/com/google/inject:guice"],
 )
 
 java_binary(
     name = "grabl-bin",
     main_class = "play.core.server.ProdServerStart",
-    runtime_deps = [":grabl"],
+    runtime_deps = [
+        ":grabl",
+        "//dependencies/maven/artifacts/com/google/inject:guice",
+    ],
 )
 
 java_binary(
@@ -49,4 +55,10 @@ java_binary(
     main_class = "com.github.johnynek.bazel_deps.ParseProject",
     visibility = ["//visibility:public"],
     runtime_deps = ["@bazel_deps//jar:jar"],
+)
+
+java_library(
+    name = "test",
+    srcs = [],
+    runtime_deps = ["//dependencies/maven/artifacts/com/google/inject:guice"],
 )

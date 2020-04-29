@@ -34,6 +34,37 @@ java_library(
 
 
 java_library(
+    name = "akka-http-core-2-12",
+    exports = [
+        "//external:jar/com/typesafe/akka/akka-http-core-2-12"
+    ],
+    runtime_deps = [
+        "//dependencies/maven/artifacts/org/scala-lang:scala-library",
+        ":akka-parsing-2-12"
+    ],
+    visibility = [
+        "//dependencies/maven/artifacts:__subpackages__"
+    ]
+)
+
+
+
+java_library(
+    name = "akka-parsing-2-12",
+    exports = [
+        "//external:jar/com/typesafe/akka/akka-parsing-2-12"
+    ],
+    runtime_deps = [
+        "//dependencies/maven/artifacts/org/scala-lang:scala-library"
+    ],
+    visibility = [
+        "//dependencies/maven/artifacts:__subpackages__"
+    ]
+)
+
+
+
+java_library(
     name = "akka-protobuf-v3-2-12",
     exports = [
         "//external:jar/com/typesafe/akka/akka-protobuf-v3-2-12"

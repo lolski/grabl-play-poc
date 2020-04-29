@@ -53,6 +53,24 @@ java_library(
 
 
 java_library(
+    name = "play-akka-http-server-2-12",
+    exports = [
+        "//external:jar/com/typesafe/play/play-akka-http-server-2-12"
+    ],
+    runtime_deps = [
+        "//dependencies/maven/artifacts/com/typesafe/akka:akka-http-core-2-12",
+        "//dependencies/maven/artifacts/org/scala-lang:scala-library",
+        ":play-server-2-12",
+        ":play-streams-2-12"
+    ],
+    visibility = [
+        "//visibility:public"
+    ]
+)
+
+
+
+java_library(
     name = "play-exceptions",
     exports = [
         "//external:jar/com/typesafe/play/play-exceptions"
@@ -74,6 +92,24 @@ java_library(
     ],
     visibility = [
         "//dependencies/maven/artifacts:__subpackages__"
+    ]
+)
+
+
+
+java_library(
+    name = "play-guice-2-12",
+    exports = [
+        "//external:jar/com/typesafe/play/play-guice-2-12"
+    ],
+    runtime_deps = [
+        "//dependencies/maven/artifacts/com/google/inject/extensions:guice-assistedinject",
+        "//dependencies/maven/artifacts/com/google/inject:guice",
+        "//dependencies/maven/artifacts/org/scala-lang:scala-library",
+        ":play-2-12"
+    ],
+    visibility = [
+        "//visibility:public"
     ]
 )
 

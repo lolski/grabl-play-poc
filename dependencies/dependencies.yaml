@@ -23,6 +23,12 @@ dependencies:
     play_2.12:
       version: "2.8.1"
       lang: java
+    play-akka-http-server_2.12:
+      version: "2.8.1"
+      lang: java
+    play-guice_2.12:
+      version: "2.8.1"
+      lang: java
     play-java_2.12:
       version: "2.8.1"
       lang: java
