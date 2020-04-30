@@ -18,10 +18,8 @@ public class Server implements ApplicationLoader {
     }
 
     static class Component extends BuiltInComponentsFromContext implements HttpFiltersComponents {
-        private ActorSystem<Object> actorSystem = ActorSystem.create(Behaviors.empty(), "server");
-        private ActorMaterializer actorMaterializer = ActorMaterializer.create(Adapter.toClassic(actorSystem));
         private event.github.Router eventGithub = new event.github.Router();
-        private service.Router service = new service.Router(actorSystem, actorMaterializer);
+        private service.Router service = new service.Router();
 
         public Component(ApplicationLoader.Context context) {
             super(context);

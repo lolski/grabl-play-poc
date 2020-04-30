@@ -1,6 +1,6 @@
 java_library(
   name = "router",
-  srcs = glob(["Router.java"]),
+  srcs = glob(["Router.java", "Session.java", "SessionRegistry.java"]),
   deps = [
       "//dependencies/maven/artifacts/com/typesafe/akka:akka-actor-2-12",
       "//dependencies/maven/artifacts/com/typesafe/akka:akka-actor-typed-2-12",
