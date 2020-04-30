@@ -5,11 +5,9 @@ import akka.actor.typed.ActorSystem;
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
-import akka.actor.typed.javadsl.Adapter;
 import akka.actor.typed.javadsl.AskPattern;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import play.libs.F;
 import play.mvc.Result;
@@ -23,7 +21,7 @@ public class SessionRegistry {
     private ActorSystem<Object> rootExecutorRef = ActorSystem.create(Executor.create(), "session-registry");
 
     public CompletionStage<F.Either<Result, Flow<String, String, ?>>> newSession() {
-        return AskPattern.ask(rootExecutorRef, replyTo -> new HashMap.SimpleImmutableEntry<>("AskPattern.ask", replyTo), Duration.ZERO, rootExecutorRef.scheduler());
+        return AskPattern.ask(rootExecutorRef, replyTo -> new HashMap.SimpleImmutableEntry<>("AskPattern.ask", replyTo), Duration.ofDays(100), rootExecutorRef.scheduler());
     }
 
     public static class Executor extends AbstractBehavior<Object> {
@@ -42,13 +40,10 @@ public class SessionRegistry {
                     .build();
         }
 
-        private Behavior<Object> onMapEntry(Map.Entry<String, ActorRef<Object>> m) {
+        private Behavior<Object> onMapEntry(Map.Entry<String, ActorRef<Object>> msg) {
             System.out.println("onMapEntry");
-            F.Either<Result, Flow<String, String, ?>> x = F.Either.Right(Flow.fromFunction(f -> {
-                System.out.println("Flow.fromFunction");
-                return "onMapEntry";
-            }));
-            m.getValue().tell(x);
+            ActorRef<Object> session1 = getContext().spawn(Session.create(), "session-1");
+            session1.tell(new HashMap.SimpleImmutableEntry<>("Session", msg.getValue()));
             return this;
         }
     }

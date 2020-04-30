@@ -18,6 +18,7 @@ public class Router extends Controller {
                 System.out.println("index::out -> ... '" + msg + "'");
                 return msg;
             })));
-        return WebSocket.Text.acceptOrResult(request -> sessionRegistry.newSession());
+        CompletionStage<F.Either<Result, Flow<String, String, ?>>> actor = sessionRegistry.newSession();
+        return WebSocket.Text.acceptOrResult(request -> actor);
     }
 }
